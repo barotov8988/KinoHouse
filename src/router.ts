@@ -12,6 +12,7 @@ export const router = createRouter({
     { path: '/catalog', name: 'catalog', component: Catalog },
     { path: '/movie/:id', name: 'movie', component: MovieDetail, props: true },
     { path: '/admin', name: 'admin', component: Admin },
+    { path: '/login', name: 'login', component: () => import('./pages/Login.vue') },
     { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
   scrollBehavior() {
