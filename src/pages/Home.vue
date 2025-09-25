@@ -100,7 +100,11 @@ function fromQuery() {
     : 'rating_desc'
 }
 
-onMounted(fromQuery)
+onMounted(() => {
+  fromQuery()
+  if (yearFrom.value == null) yearFrom.value = minYear.value
+  if (yearTo.value == null) yearTo.value = maxYear.value
+})
 
 watch([q, selectedGenres, type, yearFrom, yearTo, ratingFrom, ratingTo, actor, sort], () => {
   router.replace({ query: toQuery() })
