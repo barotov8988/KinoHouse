@@ -22,6 +22,15 @@ function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state.value))
 }
 
+// Merge newly added default movies if user has an older persisted dataset
+if (Array.isArray(persisted) && persisted.length) {
+  const missing = initialMovies.filter((m) => !state.value.some((x) => x.id === m.id))
+  if (missing.length) {
+    state.value = [...state.value, ...missing]
+    save()
+  }
+}
+
 export function useDataStore() {
   const allGenres = computed<Genre[]>(() => {
     const set = new Set<Genre>()
