@@ -73,12 +73,12 @@ const filtered = computed(() => {
         >
           <img :src="m.posterUrl" :alt="m.title" class="h-64 w-full object-cover" />
           <div class="p-3">
-            <div class="line-clamp-1 font-semibold">{{ m.title }}</div>
+            <div class="truncate font-semibold">{{ m.title }}</div>
             <div class="mt-1 flex items-center justify-between text-sm text-slate-400">
               <span>{{ m.year }}</span>
               <span class="rounded bg-yellow-500/20 px-1.5 py-0.5 text-yellow-300">★ {{ m.rating }}</span>
             </div>
-            <div class="mt-1 text-xs text-slate-400 line-clamp-1">{{ m.genres.join(', ') }}</div>
+            <div class="mt-1 text-xs text-slate-400 truncate">{{ m.genres.join(', ') }}</div>
           </div>
         </RouterLink>
       </div>
