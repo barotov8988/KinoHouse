@@ -20,7 +20,7 @@ const sort = ref<'rating_desc' | 'year_desc' | 'title_asc'>('rating_desc')
 
 const years = computed(() => {
   const ys = new Set<number>()
-  movies.forEach((m) => ys.add(m.year))
+  movies.value.forEach((m) => ys.add(m.year))
   return Array.from(ys).sort((a, b) => a - b)
 })
 const minYear = computed(() => years.value[0] ?? 1900)
@@ -34,7 +34,7 @@ const filteredSorted = computed<Movie[]>(() => {
   const rf = Math.min(ratingFrom.value, ratingTo.value)
   const rt = Math.max(ratingFrom.value, ratingTo.value)
 
-  const filtered = movies.filter((m) => {
+  const filtered = movies.value.filter((m) => {
     const byQuery =
       !query ||
       m.title.toLowerCase().includes(query) ||
