@@ -11,13 +11,13 @@ const actor = ref<string>('')
 
 const years = computed(() => {
   const ys = new Set<number>()
-  movies.forEach((m) => ys.add(m.year))
+  movies.value.forEach((m) => ys.add(m.year))
   return Array.from(ys).sort((a, b) => b - a)
 })
 
 const filtered = computed(() => {
   const query = q.value.trim().toLowerCase()
-  return movies.filter((m) => {
+  return movies.value.filter((m) => {
     const byQuery =
       !query ||
       m.title.toLowerCase().includes(query) ||
