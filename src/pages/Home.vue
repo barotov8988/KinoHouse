@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { movies } from '@/data/movies'
+import { useDataStore } from '@/store/dataStore'
+const { movies } = useDataStore()
 </script>
 
 <template>
@@ -19,7 +20,7 @@ import { movies } from '@/data/movies'
             Онлайн-кинотека
           </h1>
           <p class="mt-4 text-slate-300 text-lg">
-            Пои��к фильмов и сериалов по жанрам, актёрам и годам. Рейтинги и
+            Поиск фильмов и сериалов по жанрам, актёрам и годам. Рейтинги и
             отзывы. Трейлеры и постеры.
           </p>
           <div class="mt-8">

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
-import { movies } from '@/data/movies'
+import { useDataStore } from '@/store/dataStore'
+const { movies } = useDataStore()
 
 const route = useRoute()
 const movie = computed(() => movies.find((m) => m.id === String(route.params.id)))

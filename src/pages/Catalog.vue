@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { allActors, allGenres, movies, type Genre } from '@/data/movies'
+import { useDataStore } from '@/store/dataStore'
+const { movies, allGenres, allActors } = useDataStore()
+import type { Genre } from '@/data/movies'
 
 const q = ref('')
 const genre = ref<Genre | ''>('')
