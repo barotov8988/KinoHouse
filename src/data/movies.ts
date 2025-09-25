@@ -210,12 +210,12 @@ export const allGenres: Genre[] = Array.from(
   movies.reduce((set, m) => {
     m.genres.forEach((g) => set.add(g))
     return set
-  }, new Set<Genre>())
+  }, new Set<Genre>()),
 ) as Genre[]
 
 export const allActors: Person[] = Array.from(
   movies.reduce((set, m) => {
     m.cast.forEach((a) => set.add(a.name))
     return set
-  }, new Set<string>())
+  }, new Set<string>()),
 ).map((name) => ({ id: name, name }))

@@ -18,7 +18,8 @@ const years = computed(() => {
 const filtered = computed(() => {
   const query = q.value.trim().toLowerCase()
   return movies.filter((m) => {
-    const byQuery = !query ||
+    const byQuery =
+      !query ||
       m.title.toLowerCase().includes(query) ||
       (m.originalTitle && m.originalTitle.toLowerCase().includes(query))
     const byGenre = !genre.value || m.genres.includes(genre.value)
@@ -40,7 +41,9 @@ const filtered = computed(() => {
     </header>
 
     <div class="mx-auto max-w-7xl px-4 pb-16">
-      <div class="sticky top-0 z-10 -mx-4 mb-8 border-b border-white/10 bg-slate-950/80 px-4 py-4 backdrop-blur">
+      <div
+        class="sticky top-0 z-10 -mx-4 mb-8 border-b border-white/10 bg-slate-950/80 px-4 py-4 backdrop-blur"
+      >
         <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
           <input
             v-model="q"
@@ -78,7 +81,9 @@ const filtered = computed(() => {
             <div class="truncate font-semibold">{{ m.title }}</div>
             <div class="mt-1 flex items-center justify-between text-sm text-slate-400">
               <span>{{ m.year }}</span>
-              <span class="rounded bg-yellow-500/20 px-1.5 py-0.5 text-yellow-300">★ {{ m.rating }}</span>
+              <span class="rounded bg-yellow-500/20 px-1.5 py-0.5 text-yellow-300"
+                >★ {{ m.rating }}</span
+              >
             </div>
             <div class="mt-1 text-xs text-slate-400 truncate">{{ m.genres.join(', ') }}</div>
           </div>

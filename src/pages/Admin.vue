@@ -3,16 +3,26 @@ import { computed, ref } from 'vue'
 import { useDataStore } from '@/store/dataStore'
 import type { Movie, Genre } from '@/data/movies'
 
-const { movies, addMovie, updateMovie, deleteMovie, exportToJson, importFromJson, resetToDefaults, allGenres } = useDataStore()
+const {
+  movies,
+  addMovie,
+  updateMovie,
+  deleteMovie,
+  exportToJson,
+  importFromJson,
+  resetToDefaults,
+  allGenres,
+} = useDataStore()
 
 const q = ref('')
 const filtered = computed(() => {
   const query = q.value.trim().toLowerCase()
-  return movies.value.filter((m) =>
-    !query ||
-    m.title.toLowerCase().includes(query) ||
-    (m.originalTitle && m.originalTitle.toLowerCase().includes(query)) ||
-    String(m.year).includes(query)
+  return movies.value.filter(
+    (m) =>
+      !query ||
+      m.title.toLowerCase().includes(query) ||
+      (m.originalTitle && m.originalTitle.toLowerCase().includes(query)) ||
+      String(m.year).includes(query),
   )
 })
 
@@ -117,7 +127,10 @@ function genreToggle(g: Genre) {
 }
 
 function setCastFromString(s: string) {
-  const names = s.split(',').map((x) => x.trim()).filter(Boolean)
+  const names = s
+    .split(',')
+    .map((x) => x.trim())
+    .filter(Boolean)
   form.value.cast = Array.from(new Set(names)).map((name) => ({ id: name, name }))
 }
 
@@ -139,9 +152,7 @@ const dbMetrics = [
   { name: 'Latency p95', value: '12 ms' },
 ]
 
-const logs = [
-  { ts: '12:01:12', level: 'INFO', msg: 'Admin dashboard opened' },
-]
+const logs = [{ ts: '12:01:12', level: 'INFO', msg: 'Admin dashboard opened' }]
 </script>
 
 <template>
@@ -162,15 +173,37 @@ const logs = [
           <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
             <div class="text-lg font-semibold">Фильмы и сериалы</div>
             <div class="flex gap-2">
-              <button class="rounded bg-blue-600 px-3 py-1 hover:bg-blue-500" @click="openCreate">Добавить</button>
-              <button class="rounded bg-slate-800 px-3 py-1 hover:bg-slate-700" @click="downloadExport">Экспорт JSON</button>
-              <button class="rounded bg-slate-800 px-3 py-1 hover:bg-slate-700" @click="showImport = true">Импорт JSON</button>
-              <button class="rounded bg-red-700 px-3 py-1 hover:bg-red-600" @click="resetToDefaults">Сброс к демо-данным</button>
+              <button class="rounded bg-blue-600 px-3 py-1 hover:bg-blue-500" @click="openCreate">
+                Добавить
+              </button>
+              <button
+                class="rounded bg-slate-800 px-3 py-1 hover:bg-slate-700"
+                @click="downloadExport"
+              >
+                Экспорт JSON
+              </button>
+              <button
+                class="rounded bg-slate-800 px-3 py-1 hover:bg-slate-700"
+                @click="showImport = true"
+              >
+                Импорт JSON
+              </button>
+              <button
+                class="rounded bg-red-700 px-3 py-1 hover:bg-red-600"
+                @click="resetToDefaults"
+              >
+                Сброс к демо-данным
+              </button>
             </div>
           </div>
 
           <div class="mb-3">
-            <input v-model="q" type="search" placeholder="Поиск по названию/году" class="w-full rounded bg-slate-800 px-3 py-2" />
+            <input
+              v-model="q"
+              type="search"
+              placeholder="Поиск по названию/году"
+              class="w-full rounded bg-slate-800 px-3 py-2"
+            />
           </div>
 
           <div class="overflow-x-auto">
@@ -191,11 +224,25 @@ const logs = [
                   <td class="px-3 py-2">{{ m.title }}</td>
                   <td class="px-3 py-2 text-slate-300">{{ m.year }}</td>
                   <td class="px-3 py-2 text-slate-300">{{ m.type }}</td>
-                  <td class="px-3 py-2"><span class="rounded bg-yellow-500/20 px-1.5 py-0.5 text-yellow-300">★ {{ m.rating }}</span></td>
+                  <td class="px-3 py-2">
+                    <span class="rounded bg-yellow-500/20 px-1.5 py-0.5 text-yellow-300"
+                      >★ {{ m.rating }}</span
+                    >
+                  </td>
                   <td class="px-3 py-2">
                     <div class="flex gap-2">
-                      <button class="rounded bg-slate-800 px-2 py-1 hover:bg-slate-700" @click="openEdit(m)">Редактировать</button>
-                      <button class="rounded bg-red-700 px-2 py-1 hover:bg-red-600" @click="remove(m.id)">Удалить</button>
+                      <button
+                        class="rounded bg-slate-800 px-2 py-1 hover:bg-slate-700"
+                        @click="openEdit(m)"
+                      >
+                        Редактировать
+                      </button>
+                      <button
+                        class="rounded bg-red-700 px-2 py-1 hover:bg-red-600"
+                        @click="remove(m.id)"
+                      >
+                        Удалить
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -215,7 +262,9 @@ const logs = [
             </dl>
             <div class="mt-4 flex gap-2">
               <button class="rounded bg-slate-800 px-3 py-1 hover:bg-slate-700">Перезапуск</button>
-              <button class="rounded bg-slate-800 px-3 py-1 hover:bg-slate-700">Очистить кэш</button>
+              <button class="rounded bg-slate-800 px-3 py-1 hover:bg-slate-700">
+                Очистить кэш
+              </button>
             </div>
           </div>
 
@@ -228,8 +277,12 @@ const logs = [
               </template>
             </dl>
             <div class="mt-4 flex gap-2">
-              <button class="rounded bg-slate-800 px-3 py-1 hover:bg-slate-700">Снимок бэкапа</button>
-              <button class="rounded bg-slate-800 px-3 py-1 hover:bg-slate-700">Проверка целостности</button>
+              <button class="rounded bg-slate-800 px-3 py-1 hover:bg-slate-700">
+                Снимок бэкапа
+              </button>
+              <button class="rounded bg-slate-800 px-3 py-1 hover:bg-slate-700">
+                Проверка целостности
+              </button>
             </div>
           </div>
         </div>
@@ -284,27 +337,54 @@ const logs = [
           </label>
           <label class="grid gap-1">
             <span class="text-sm text-slate-300">Год</span>
-            <input v-model.number="form.year" type="number" class="rounded bg-slate-800 px-3 py-2" />
+            <input
+              v-model.number="form.year"
+              type="number"
+              class="rounded bg-slate-800 px-3 py-2"
+            />
           </label>
           <label v-if="form.type === 'movie'" class="grid gap-1">
             <span class="text-sm text-slate-300">Длительность (мин)</span>
-            <input v-model.number="form.runtime" type="number" class="rounded bg-slate-800 px-3 py-2" />
+            <input
+              v-model.number="form.runtime"
+              type="number"
+              class="rounded bg-slate-800 px-3 py-2"
+            />
           </label>
           <label v-else class="grid gap-1">
             <span class="text-sm text-slate-300">Сезонов</span>
-            <input v-model.number="form.seasons" type="number" class="rounded bg-slate-800 px-3 py-2" />
+            <input
+              v-model.number="form.seasons"
+              type="number"
+              class="rounded bg-slate-800 px-3 py-2"
+            />
           </label>
           <label class="grid gap-1 md:col-span-2">
             <span class="text-sm text-slate-300">Описание</span>
-            <textarea v-model="form.overview" rows="3" class="rounded bg-slate-800 px-3 py-2"></textarea>
+            <textarea
+              v-model="form.overview"
+              rows="3"
+              class="rounded bg-slate-800 px-3 py-2"
+            ></textarea>
           </label>
           <label class="grid gap-1">
             <span class="text-sm text-slate-300">Рейтинг (0-10)</span>
-            <input v-model.number="form.rating" type="number" step="0.1" min="0" max="10" class="rounded bg-slate-800 px-3 py-2" />
+            <input
+              v-model.number="form.rating"
+              type="number"
+              step="0.1"
+              min="0"
+              max="10"
+              class="rounded bg-slate-800 px-3 py-2"
+            />
           </label>
           <label class="grid gap-1">
             <span class="text-sm text-slate-300">Голоса</span>
-            <input v-model.number="form.votes" type="number" class="rounded bg-slate-800 px-3 py-2" />
+            <input
+              v-model.number="form.votes"
+              type="number"
+              class="rounded bg-slate-800 px-3 py-2"
+            />
           </label>
           <div class="md:col-span-2">
             <div class="text-sm text-slate-300 mb-1">Жанры</div>
@@ -316,7 +396,7 @@ const logs = [
                 @click="genreToggle(g)"
                 :class="[
                   'rounded-full px-3 py-1 text-sm',
-                  form.genres.includes(g) ? 'bg-blue-600' : 'bg-slate-800'
+                  form.genres.includes(g) ? 'bg-blue-600' : 'bg-slate-800',
                 ]"
               >
                 {{ g }}
@@ -325,7 +405,11 @@ const logs = [
           </div>
           <label class="grid gap-1 md:col-span-2">
             <span class="text-sm text-slate-300">Актёры (через запятую)</span>
-            <input :value="castAsString()" @input="setCastFromString(($event.target as HTMLInputElement).value)" class="rounded bg-slate-800 px-3 py-2" />
+            <input
+              :value="castAsString()"
+              @input="setCastFromString(($event.target as HTMLInputElement).value)"
+              class="rounded bg-slate-800 px-3 py-2"
+            />
           </label>
           <label class="grid gap-1 md:col-span-2">
             <span class="text-sm text-slate-300">Poster URL</span>
@@ -341,8 +425,19 @@ const logs = [
           </label>
 
           <div class="md:col-span-2 mt-2 flex justify-end gap-2">
-            <button type="button" class="rounded bg-slate-800 px-4 py-2 hover:bg-slate-700" @click="showForm = false">Отмена</button>
-            <button type="submit" class="rounded bg-blue-600 px-4 py-2 font-medium hover:bg-blue-500">Сохранить</button>
+            <button
+              type="button"
+              class="rounded bg-slate-800 px-4 py-2 hover:bg-slate-700"
+              @click="showForm = false"
+            >
+              Отмена
+            </button>
+            <button
+              type="submit"
+              class="rounded bg-blue-600 px-4 py-2 font-medium hover:bg-blue-500"
+            >
+              Сохранить
+            </button>
           </div>
         </form>
       </div>
@@ -354,10 +449,24 @@ const logs = [
           <h2 class="text-lg font-semibold">Импорт JSON</h2>
           <button class="text-slate-400 hover:text-white" @click="showImport = false">✕</button>
         </div>
-        <textarea v-model="importText" rows="12" class="mt-4 w-full rounded bg-slate-800 p-3"></textarea>
+        <textarea
+          v-model="importText"
+          rows="12"
+          class="mt-4 w-full rounded bg-slate-800 p-3"
+        ></textarea>
         <div class="mt-3 flex justify-end gap-2">
-          <button class="rounded bg-slate-800 px-4 py-2 hover:bg-slate-700" @click="showImport = false">Отмена</button>
-          <button class="rounded bg-blue-600 px-4 py-2 font-medium hover:bg-blue-500" @click="runImport">Импортировать</button>
+          <button
+            class="rounded bg-slate-800 px-4 py-2 hover:bg-slate-700"
+            @click="showImport = false"
+          >
+            Отмена
+          </button>
+          <button
+            class="rounded bg-blue-600 px-4 py-2 font-medium hover:bg-blue-500"
+            @click="runImport"
+          >
+            Импортировать
+          </button>
         </div>
       </div>
     </div>

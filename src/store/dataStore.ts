@@ -11,7 +11,10 @@ function safeParse<T>(text: string): T | null {
   }
 }
 
-const persisted = typeof localStorage !== 'undefined' ? safeParse<Movie[]>(localStorage.getItem(STORAGE_KEY) || '') : null
+const persisted =
+  typeof localStorage !== 'undefined'
+    ? safeParse<Movie[]>(localStorage.getItem(STORAGE_KEY) || '')
+    : null
 const state = ref<Movie[]>(Array.isArray(persisted) && persisted.length ? persisted : initialMovies)
 
 function save() {

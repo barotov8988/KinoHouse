@@ -25,17 +25,25 @@ const movie = computed(() => movies.find((m) => m.id === String(route.params.id)
         :alt="movie.title"
         class="h-72 w-full object-cover opacity-40"
       />
-      <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950"></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950"
+      ></div>
     </div>
 
     <div class="mx-auto -mt-24 max-w-7xl px-4">
       <div class="grid grid-cols-1 md:grid-cols-[220px,1fr] gap-8 items-start">
-        <img :src="movie.posterUrl" :alt="movie.title" class="w-56 rounded-xl ring-1 ring-white/10" />
+        <img
+          :src="movie.posterUrl"
+          :alt="movie.title"
+          class="w-56 rounded-xl ring-1 ring-white/10"
+        />
 
         <div>
           <h1 class="text-3xl md:text-4xl font-extrabold">{{ movie.title }}</h1>
           <div class="mt-2 flex flex-wrap items-center gap-3 text-slate-300">
-            <span class="rounded bg-yellow-500/20 px-2 py-0.5 text-yellow-300">★ {{ movie.rating }}</span>
+            <span class="rounded bg-yellow-500/20 px-2 py-0.5 text-yellow-300"
+              >★ {{ movie.rating }}</span
+            >
             <span>{{ movie.year }}</span>
             <span class="text-slate-400">•</span>
             <span v-if="movie.type === 'movie'">{{ movie.runtime }} мин</span>

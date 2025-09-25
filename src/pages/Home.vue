@@ -4,7 +4,9 @@ const { movies } = useDataStore()
 </script>
 
 <template>
-  <section class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+  <section
+    class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white"
+  >
     <header class="mx-auto max-w-7xl px-4 py-6 flex items-center justify-between">
       <RouterLink to="/" class="text-xl font-bold tracking-tight">Кинотека</RouterLink>
       <nav class="flex items-center gap-6 text-slate-200">
@@ -16,12 +18,10 @@ const { movies } = useDataStore()
     <div class="mx-auto max-w-7xl px-4 py-16">
       <div class="grid md:grid-cols-2 gap-10 items-center">
         <div>
-          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
-            Онлайн-кинотека
-          </h1>
+          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">Онлайн-кинотека</h1>
           <p class="mt-4 text-slate-300 text-lg">
-            Поиск фильмов и сериалов по жанрам, актёрам и годам. Рейтинги и
-            отзывы. Трейлеры и постеры.
+            Поиск фильмов и сериалов по жанрам, актёрам и годам. Рейтинги и отзывы. Трейлеры и
+            постеры.
           </p>
           <div class="mt-8">
             <RouterLink
